@@ -20,7 +20,6 @@ def Calculate_e(phi_n):
       e = 2
       while(e < phi_n):
             if GCD(e,phi_n) == 1:
-                  print("GCD OF E AND PHI", GCD(e,phi_n))
                   return e   
             else:
                   e = e +1
@@ -63,7 +62,6 @@ def mult_inv(e,r):
 #RSA Decryption
 def Decryption(C, d, n):
       M = []
-      print("D is ", d)
       for c in C:
             M.append((c ** d) % n)      
       
@@ -71,32 +69,3 @@ def Decryption(C, d, n):
 def toStr(asci):
       return (''.join(chr(i) for i in asci))
 
-p, q = GetP_Q()
-n = p  * q
-phi_n = (p-1)* (q-1)
-e = Calculate_e(phi_n)
-m = "this is the Message"
-M = to_Asci(m)
-m_weight = max(M)
-
-while(m_weight > n):
-      p, q = GetP_Q()
-      n = p  * q
-      phi_n = (p-1)* (q-1)
-      e = Calculate_e(phi_n)
-
-chiper = Encryption(m, e, n)
-print("The encrypted Message is ",chiper)
-d = mult_inv(e, phi_n)
-print("P is ",p)
-print("q is ",q)
-print("n is ",n)
-print("phi_n is ",phi_n)
-print("e is ",e)
-print("d is ",d)
-
-Message = Decryption(chiper,d, n )
-
-
-print("finall message ",Message)
-print("string ",toStr(Message))
